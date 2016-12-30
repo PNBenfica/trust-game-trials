@@ -8,8 +8,9 @@ const testSchema = mongoose.Schema({
   type            : String,
   created_at      : String,
   data			  : [{
-  						video_name: String,
-  						trust_rating: Number,
+  						name: String,
+  						rating: Number,
+  						sellerRating: Number,
   						purchase_decision: Boolean,
   					}]
 });

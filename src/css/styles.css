@@ -1,0 +1,128 @@
+html{
+	overflow-x: hidden;
+}
+
+
+#home-buttons-container{
+	margin-top: 20%;
+}
+
+a{
+	text-decoration: none !important;
+}
+
+.btn{
+	border-radius: 0px;
+	border: solid 1px #333;
+	color: #333;
+	background-color: white;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+
+.btn:hover{
+	color: white;
+	background-color: #333;
+}
+
+#pretest video{
+	margin-left: 28%;
+	margin-top: 20px;
+}
+
+
+.likert-scale{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+.likert-scale-option{
+	width: 5%;
+	display: inline-block;
+}
+
+.likert-scale-option .outer{
+	width: 16px;
+	height: 16px;
+	padding-left: 2px;
+	padding-top: 2px;
+	margin-left: -3px;
+	margin-top: 3px;
+	background-color: black;
+	border-radius: 100px;
+}
+
+.likert-scale-option .inner{
+	width: 12px;
+	height: 12px;
+	background-color: white;
+	border-radius: 100px;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+
+.likert-scale-option .outer:hover{
+	cursor: pointer;
+}
+
+.likert-scale-option .outer.active .inner, .likert-scale-option .outer:hover .inner{
+	background-color: #B3B3B3;
+}
+
+
+.likert-scale-label{
+	width: 10%;
+	display: inline-block;
+}
+
+.video-count{
+	position: fixed;
+	bottom: 50px;
+	right: 150px;
+}
+
+#thanks{
+	text-align: center;
+	margin-top: 60px;
+}
+
+#thanks h1,h5{
+	color: black;
+}
+
+#purchase-buttons-container button{
+	margin-top: 60px;
+}
+
+#sellerRating i{
+	font-size: 40px;
+}
+
+
+.seller-rating-description {
+	margin-top: 50px;
+}
+
+.seller-rating-description i{
+	font-size: 15px !important;
+}
+
+.star-description .five-star-rating{
+	display: inline;
+}
+
+#maintest{
+	padding-top: 50px;
+}
+
+video{
+	background-color: black;
+}
+
+h4{
+	font-size: 16px;
+	font-weight: 700;
+}

@@ -12,6 +12,8 @@ module.exports = router => {
 
 	router.post('/tests', (req, res) => {
 
+		console.log(req)
+
 		const { type, data } = req.body
 
 		console.log("\n" + "| NEW TEST | Type: " + type)

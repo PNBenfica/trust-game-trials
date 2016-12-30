@@ -31,8 +31,8 @@ exports.insertNewTest = (type, data) =>
     			html: `${data}`
     		
 			};
-
-			return transporter.sendMail(mailOptions)
+			return true
+			// return transporter.sendMail(mailOptions)
 		})
 
 		.then(info => {
