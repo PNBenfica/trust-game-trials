@@ -13,11 +13,24 @@ export default class Pretest extends React.Component {
 
     constructor(args){
         super(...args)
+        let videos = ["video1.mp4", "video2.mp4", "video3.mp4", "video4.mp4", "video5.mp4"]
+        this.shuffle(videos)
+        videos = videos.map(video => {return {name: video} })
         this.state = {
-            videos: [{name: "video1.mp4"}, {name: "video2.mp4"}],
+            videos: videos,
             activeVideo: 0,
             selectedRating: -1
         }
+    }
+
+    shuffle(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1))
+            var temp = array[i]
+            array[i] = array[j]
+            array[j] = temp
+        }
+        return array
     }
 
     storeTest() {
@@ -38,7 +51,6 @@ export default class Pretest extends React.Component {
                 this.setState({activeVideo, selectedRating: -1, videos})
             }
             else{
-                console.log(videos)
                 this.storeTest()
             }   
         }
@@ -55,7 +67,7 @@ export default class Pretest extends React.Component {
 
                     <Video src={video}/>
 
-                    <LikertScale selected={selectedRating} onClick={this.onLikertScaleClick.bind(this)} />
+                    <LikertScale selected={selectedRating} onClick={this.onLikertScaleClick.bind(this)} question="Indicate on a scale 1 to 7 how much you trust or distrust this person" />
 
                     <SubmitButton title="Submit" onClick={this.onSubmit.bind(this)} />
 

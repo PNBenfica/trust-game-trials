@@ -1,6 +1,8 @@
 import axios from "axios"
 
 export function storeTest(videos, type) {
+    
+    console.log(videos)
 
     const data = {
         data : videos,

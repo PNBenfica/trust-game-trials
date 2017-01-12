@@ -16,7 +16,7 @@ const app = document.getElementById('app')
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
-			<Route path="/" component={Layout}></Route>
+			<Route path="/" component={Pretest}></Route>
 			<Route path="maintest" name="maintest" component={MainTest}></Route>
 			<Route path="pretest" name="pretest" component={Pretest}></Route>
 			<Route path="thanks" name="thanks" component={Thanks}></Route>

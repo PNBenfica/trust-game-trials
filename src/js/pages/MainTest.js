@@ -90,7 +90,7 @@ export default class MainTest extends React.Component {
         const { selectedRating } = this.state
         return (
             <div class="col-lg-12">
-                <LikertScale selected={selectedRating} onClick={this.onLikertScaleClick.bind(this)} />
+                <LikertScale selected={selectedRating} onClick={this.onLikertScaleClick.bind(this)} question="Indicate on a scale 1 to 7 how much you trust or distrust this seller" />
                 <SubmitButton title="Submit" onClick={this.onSubmit.bind(this)} />
             </div>
         )
