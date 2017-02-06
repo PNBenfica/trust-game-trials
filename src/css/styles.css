@@ -3,6 +3,10 @@ html{
 }
 
 
+.container{
+	margin-top: 5%;
+}
+
 #home-buttons-container{
 	margin-top: 20%;
 }
@@ -69,7 +73,7 @@ a{
 }
 
 .likert-scale-option .outer.active .inner, .likert-scale-option .outer:hover .inner{
-	background-color: #B3B3B3;
+	background-color: #4285F4;
 }
 
 

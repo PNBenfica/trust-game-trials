@@ -1,12 +1,16 @@
 import axios from "axios"
 
-export function storeTest(videos, type) {
+export function storeTest(videos, type, age, gender) {
     
+    console.log("AGE: " + age )
+    console.log("GENDER: " + gender )
     console.log(videos)
 
     const data = {
         data : videos,
-        type: type
+        type: type,
+        age: age,
+        gender: gender
     }
 
     return {

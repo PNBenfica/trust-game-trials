@@ -12,12 +12,10 @@ export default function reducer(state={
       }
       case "STORE_TEST_REJECTED": {
         console.log("Upload Failed! XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-        browserHistory.push("/thanks");
-        return {...state, fetching: false, error: action.payload}
+        return {...state, storing: false, error: action.payload}
       }
       case "STORE_TEST_FULFILLED": {
         console.log("Upload Success!")
-        browserHistory.push("/thanks");
         return {
           ...state,
           storing: false,

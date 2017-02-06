@@ -8,7 +8,7 @@ export default class Count extends React.Component {
 
         return (
             <p class="video-count">
-            	{current}/{total}
+            	{current + 1}/{total}
             </p>
         )
     }

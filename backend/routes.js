@@ -12,17 +12,17 @@ module.exports = router => {
 
 	router.post('/tests', (req, res) => {
 
-		const { type, data } = req.body
+		const { type, data, age, gender } = req.body
 
-		console.log("\n" + "| NEW TEST | Type: " + type)
+		console.log("\n" + "| NEW TEST | Type: " + type + " | Age: " + age + " | Gender: " + gender)
 
-		if (!type || !type.trim() || !validTestType(type) ) {
+		if (!type || !type.trim() || !age || !age.trim() || !gender || !gender.trim() || !validTestType(type) ) {
 			res.status(400).json({message: 'Invalid Request !'})
 
 		} else {
 
 
-			tests.insertNewTest(type, data)
+			tests.insertNewTest(type, data, age, gender)
 
 			.then(result => {
 				res.status(result.status).json({ message: result.message })
@@ -38,6 +38,18 @@ module.exports = router => {
 		console.log("\n" + "| GET TESTS |")
 
 		tests.getTests()
+
+		.then(result => res.json(result))
+
+		.catch(err => res.status(err.status).json({ message: err.message }))
+	})
+
+
+	router.get('/stats', (req, res) => {
+
+		console.log("\n" + "| GET TESTS |")
+
+		tests.getStats()
 
 		.then(result => res.json(result))
 

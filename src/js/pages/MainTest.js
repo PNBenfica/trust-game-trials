@@ -16,7 +16,7 @@ export default class MainTest extends React.Component {
     constructor(args){
         super(...args)
         this.state = {
-            videos: [{sellerRating:1, name: "video1.mp4"}, {sellerRating:3, name: "video2.mp4"}],
+            videos: [{sellerRating:1, name: "tiago.mp4"}, {sellerRating:3, name: "video2.mp4"}],
             activeVideo: 0,
             selectedRating: -1
         }

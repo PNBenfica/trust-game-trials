@@ -7,6 +7,8 @@ const Schema = mongoose.Schema;
 const testSchema = mongoose.Schema({ 
   type            : String,
   created_at      : String,
+  age      		  : Number,
+  gender      	  : String,
   data			  : [{
   						name: String,
   						rating: Number,

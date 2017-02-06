@@ -1,10 +1,12 @@
 import React from "react"
+import { browserHistory } from "react-router"
 
 export default class Thanks extends React.Component {
     render() {
 
+        
         return (
-            <div id="thanks" class="container">
+            <div onClick={() => browserHistory.push("/")} id="thanks" class="container" style={{marginTop: "15%"}}>
                 <div class="row">
                     <img src="img/check.png" />
                     <h1>Thanks</h1>
