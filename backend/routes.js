@@ -12,17 +12,17 @@ module.exports = router => {
 
 	router.post('/tests', (req, res) => {
 
-		const { type, data, age, gender } = req.body
+		const { type, data, age, gender, internetUsage } = req.body
 
-		console.log("\n" + "| NEW TEST | Type: " + type + " | Age: " + age + " | Gender: " + gender)
+		console.log("\n" + "| NEW TEST | Type: " + type + " | Age: " + age + " | Gender: " + gender + " | InternetUsage: " + internetUsage)
 
-		if (!type || !type.trim() || !age || !age.trim() || !gender || !gender.trim() || !validTestType(type) ) {
+		if (!type || !type.trim() || !age || !age.trim() || !gender || !gender.trim() || !internetUsage || !internetUsage.trim() || !validTestType(type) ) {
 			res.status(400).json({message: 'Invalid Request !'})
 
 		} else {
 
 
-			tests.insertNewTest(type, data, age, gender)
+			tests.insertNewTest(type, data, age, gender, internetUsage)
 
 			.then(result => {
 				res.status(result.status).json({ message: result.message })

@@ -13,6 +13,13 @@ import SellerVideo from "./../components/maintest/SellerVideo"
 
 import { storeTest } from "../actions/testsActions"
 
+
+let trustWorthyVideos = ["margarida.mp4", "rui.mp4", "paula.mp4"]
+let untrustWorthyVideos = ["pedro.mp4", "alexandre.mp4", "rafa.mp4"]
+let noVideos = ["", "", ""]
+let fillerVideos = ["lameiras.mp4","castilho.mp4","canina.mp4", "carlos.mp4", "bernardo.mp4", "marco.mp4", "ceia.mp4"]
+
+
 @connect()
 export default class MainTest extends React.Component {
 
@@ -20,29 +27,20 @@ export default class MainTest extends React.Component {
         super(...args)
         //let videos = ["alexandre.mp4","bernardo.mp4","canina.mp4","carlos.mp4","castilho.mp4","ceia.mp4","fernando.mp4","joao.mp4","lameiras.mp4","marco.mp4","margarida.mp4","nuno.mp4","paula.mp4","pedro.mp4","peres.mp4","rafa.mp4","ruben.mp4","rui.mp4","silvia.mp4","tiago.mp4","torres.mp4"]
          let videos = [{sellerRating:1, name: "tiago.mp4"}, {sellerRating:3, name: "castilho.mp4"}]
-        // this.shuffle(videos)
 
-        let trustWorthyVideos = ["margarida.mp4", "rui.mp4", "ruben.mp4"]
-        let untrustWorthyVideos = ["pedro.mp4", "alexandre.mp4", "rafa.mp4"]
-        let noVideos = ["", "", ""]
-        let fillerVideos = ["lameiras.mp4","castilho.mp4","canina.mp4", "carlos.mp4", "bernardo.mp4"]
 
         const reputationScores = [0,3,4]
         const fillerReputationScores = this.generateFillerReputationScores(fillerVideos.length)
 
-        trustWorthyVideos = this.assignReputation(["margarida.mp4", "rui.mp4", "ruben.mp4"], reputationScores)
-        untrustWorthyVideos = this.assignReputation(["pedro.mp4", "alexandre.mp4", "rafa.mp4"], reputationScores)
-        noVideos = this.assignReputation(["pedro.mp4", "alexandre.mp4", "rafa.mp4"], reputationScores)
-        fillerVideos = this.assignReputation(["lameiras.mp4","castilho.mp4","canina.mp4", "carlos.mp4", "bernardo.mp4"], fillerReputationScores);
+        trustWorthyVideos = this.assignReputation(trustWorthyVideos, reputationScores)
+        untrustWorthyVideos = this.assignReputation(untrustWorthyVideos, reputationScores)
+        noVideos = this.assignReputation(noVideos, reputationScores)
+        fillerVideos = this.assignReputation(fillerVideos, fillerReputationScores).concat(this.assignReputation(["peres.mp4","tiago.mp4"], [4,5]));
 
 
-        console.log(JSON.stringify(trustWorthyVideos))
-        console.log(JSON.stringify(untrustWorthyVideos))
-        console.log(JSON.stringify(noVideos))
-        console.log(JSON.stringify(fillerVideos))
-
-        const videos2 = mixVideos(trustWorthyVideos, untrustWorthyVideos, noVideos, fillerVideos)
+        videos = this.mixVideos(trustWorthyVideos, untrustWorthyVideos, noVideos, fillerVideos)
         
+        console.log(JSON.stringify(videos))
 
         this.state = {
             videos: videos,
@@ -76,11 +74,24 @@ export default class MainTest extends React.Component {
     }
 
     mixVideos(trustWorthy, untrustWorthy, no, filler){
-        
+        let videos = [].concat(trustWorthy, untrustWorthy, no)
+        videos = this.shuffle(videos)
+
+        this.insertFillers(videos, filler)
+        return videos
     }
 
-    storeTest(age, gender) {
-        this.props.dispatch(storeTest(this.state.videos, "Main_Test", age, gender))
+    insertFillers(videos, fillers){
+        const fillerIndexes = [0,1,2,5,8,11,14,16,17]
+        fillers.forEach((fillerVideo, i) => this.insertFiller(videos, fillerVideo, fillerIndexes[i]))
+    }
+
+    insertFiller(videos, fillerVideo, index){
+        videos.splice(index, 0, fillerVideo);
+    }
+
+    storeTest(age, gender, internetUsage) {
+        this.props.dispatch(storeTest(this.state.videos, "Main_Test", age, gender, internetUsage))
         browserHistory.push("/thanks");
     }
 
@@ -90,7 +101,7 @@ export default class MainTest extends React.Component {
 
     onPurchaseDecision(decision){
         const videos = [...this.state.videos]
-        videos[this.state.activeVideo].purchase_decision = decision == "Buy"
+        videos[this.state.activeVideo].purchase_decision = decision == "Comprar"
         this.setState({videos})
     }
 
@@ -105,8 +116,8 @@ export default class MainTest extends React.Component {
         }
     }
 
-    setAge(age, gender){
-        this.storeTest(age, gender)
+    setAge(age, gender, internetUsage){
+        this.storeTest(age, gender, internetUsage)
     }
 
     render() {
@@ -114,6 +125,7 @@ export default class MainTest extends React.Component {
         const { videos, activeVideo, selectedRating } = this.state
 
         if (activeVideo == videos.length)
+        // if (true)
             return <AgePicker onSubmit={this.setAge.bind(this)}/>
         
         const video = videos[activeVideo]
@@ -151,8 +163,8 @@ export default class MainTest extends React.Component {
         const { selectedRating } = this.state
         return (
             <div class="col-lg-12">
-                <LikertScale selected={selectedRating} onClick={this.onLikertScaleClick.bind(this)} question="Indicate on a scale 1 to 7 how much you trust or distrust this seller" />
-                <SubmitButton title="Next" onClick={this.onSubmit.bind(this)} />
+                <LikertScale selected={selectedRating} onClick={this.onLikertScaleClick.bind(this)} question="Indica numa escala de 1 a 7 quanto confias ou desconfias deste seller" />
+                <SubmitButton title="Próximo" onClick={this.onSubmit.bind(this)} />
             </div>
         )
     }

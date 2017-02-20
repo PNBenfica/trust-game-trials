@@ -11,7 +11,7 @@ export default class SellerRating extends React.Component {
 
         return (
             <div class="col-lg-6" id="sellerRating">
-            	<h4>Average cooperativeness in previous negotiations</h4>
+            	<h4>Cooperação em transações passadas</h4>
                 <FiveStar id="sellerRating" nStars={nStars} />
 
                 <SellerRatingDescription />

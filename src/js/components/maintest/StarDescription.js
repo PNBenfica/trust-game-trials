@@ -11,7 +11,7 @@ export default class StarDescription extends React.Component {
         return (
             <div class="star-description">
                 <FiveStar nStars={stars}/>
-                <span> : {min}-{max} cooperative</span>
+                <span> : Enviou {min}-{max}%</span>
             </div>
         )
     }

@@ -9,6 +9,7 @@ const testSchema = mongoose.Schema({
   created_at      : String,
   age      		  : Number,
   gender      	  : String,
+  internetUsage          : String,
   data			  : [{
   						name: String,
   						rating: Number,

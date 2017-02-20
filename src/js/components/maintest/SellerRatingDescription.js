@@ -1,5 +1,6 @@
 import React from "react"
 
+import FiveStar from "./FiveStar"
 import StarDescription from "./StarDescription"
 
 export default class SellerRatingDescription extends React.Component {
@@ -10,6 +11,7 @@ export default class SellerRatingDescription extends React.Component {
 
         return (
             <div class="seller-rating-description">
+	            <div class="star-description"><FiveStar nStars={0}/><span> : Sem reputação</span></div>
                 {description.map((description,i) => <StarDescription key={i} {...description} />)}
             </div>
         )

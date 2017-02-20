@@ -4,7 +4,7 @@ const test = require('../models/test')
 const nodemailer = require('nodemailer')
 const config = require('../config/config.json')
 
-exports.insertNewTest = (type, data, age, gender) => 
+exports.insertNewTest = (type, data, age, gender, internetUsage) => 
 
 	new Promise((resolve,reject) => {
 
@@ -14,6 +14,7 @@ exports.insertNewTest = (type, data, age, gender) =>
 			data: data,
 			age: age,
 			gender: gender,
+  			internetUsage: String,
 		})
 
 
@@ -24,7 +25,7 @@ exports.insertNewTest = (type, data, age, gender) =>
 			const transporter = nodemailer.createTransport(`smtps://${config.email}:${config.password}@smtp.gmail.com`)
 
 			data = data.map(JSON.stringify).reduce((json1,json2) => json1 + json2 + ",<br>", "")
-			data = "Age: " + age + "<br/>" + "Gender: " + gender + "<br/>" + data
+			data = "Age: " + age + "<br/>" + "Gender: " + gender + "<br/>" + "Internet Usage: " + internetUsage + "<br/>" + data
 
 			const mailOptions = {
 
