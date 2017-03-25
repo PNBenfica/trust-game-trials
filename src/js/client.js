@@ -20,7 +20,7 @@ ReactDOM.render(
 			<Route path="/" component={Intro}></Route>
 			<Route path="maintest" name="maintest" component={MainTest}></Route>
 			<Route path="pretest" name="pretest" component={Pretest}></Route>
-			<Route path="thanks" name="thanks" component={Thanks}></Route>
+			<Route path="thanks/:candies" name="thanks" component={Thanks}></Route>
 		</Router>
 	</Provider>,
 app)

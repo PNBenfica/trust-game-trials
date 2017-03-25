@@ -47,7 +47,7 @@ export default class AgePicker extends React.Component {
 				</div>
 
             	<div class="form-group">
-					<label for="sel1">Quantas vezes efetua quantas compras através da internet por ano?</label>
+					<label for="sel1">Quantas vezes efetua compras através da internet por ano?</label>
 		            <form>
 						<input type="radio" name="gender" value="0" onChange={this.handleOptionChange.bind(this)}  checked={this.state.selectedOption === '0'} /> 0<br/>
 						<input type="radio" name="gender" value="1 - 3" onChange={this.handleOptionChange.bind(this)}  checked={this.state.selectedOption === '1 - 3'}/> 1 - 3<br/>

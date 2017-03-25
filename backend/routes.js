@@ -33,11 +33,16 @@ module.exports = router => {
 	})
 
 
-	router.get('/tests', (req, res) => {
+	router.get('/tests/:type', (req, res) => {
 
 		console.log("\n" + "| GET TESTS |")
 
-		tests.getTests()
+		const { type } = req.params
+		if (!type || !type.trim() || !validTestType(type) ) {
+			res.status(400).json({message: 'Invalid Request !'})
+		}
+
+		tests.getTests(type)
 
 		.then(result => res.json(result))
 
@@ -45,11 +50,16 @@ module.exports = router => {
 	})
 
 
-	router.get('/stats', (req, res) => {
+	router.get('/stats/:type', (req, res) => {
 
-		console.log("\n" + "| GET TESTS |")
+		console.log("\n" + "| GET STATS |")
 
-		tests.getStats()
+		const { type } = req.params
+		if (!type || !type.trim() || !validTestType(type) ) {
+			res.status(400).json({message: 'Invalid Request !'})
+		}
+
+		tests.getStats(type)
 
 		.then(result => res.json(result))
 

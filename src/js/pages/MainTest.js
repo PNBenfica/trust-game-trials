@@ -14,20 +14,18 @@ import SellerVideo from "./../components/maintest/SellerVideo"
 import { storeTest } from "../actions/testsActions"
 
 
-let trustWorthyVideos = ["margarida.mp4", "rui.mp4", "paula.mp4"]
-let untrustWorthyVideos = ["pedro.mp4", "alexandre.mp4", "rafa.mp4"]
-let noVideos = ["", "", ""]
-let fillerVideos = ["lameiras.mp4","castilho.mp4","canina.mp4", "carlos.mp4", "bernardo.mp4", "marco.mp4", "ceia.mp4"]
-
-
 @connect()
 export default class MainTest extends React.Component {
 
     constructor(args){
         super(...args)
         //let videos = ["alexandre.mp4","bernardo.mp4","canina.mp4","carlos.mp4","castilho.mp4","ceia.mp4","fernando.mp4","joao.mp4","lameiras.mp4","marco.mp4","margarida.mp4","nuno.mp4","paula.mp4","pedro.mp4","peres.mp4","rafa.mp4","ruben.mp4","rui.mp4","silvia.mp4","tiago.mp4","torres.mp4"]
-         let videos = [{sellerRating:1, name: "tiago.mp4"}, {sellerRating:3, name: "castilho.mp4"}]
+         //let videos = [{sellerRating:1, name: "tiago.mp4"}, {sellerRating:3, name: "castilho.mp4"}]
 
+        let trustWorthyVideos = ["margarida.mp4", "rui.mp4", "paula.mp4"]
+        let untrustWorthyVideos = ["pedro.mp4", "alexandre.mp4", "rafa.mp4"]
+        let noVideos = ["", "", ""]
+        let fillerVideos = ["marco.mp4","castilho.mp4","peres.mp4", "tiago.mp4", "ceia.mp4", "lameiras.mp4", "torres.mp4"]
 
         const reputationScores = [0,3,4]
         const fillerReputationScores = this.generateFillerReputationScores(fillerVideos.length)
@@ -35,10 +33,10 @@ export default class MainTest extends React.Component {
         trustWorthyVideos = this.assignReputation(trustWorthyVideos, reputationScores)
         untrustWorthyVideos = this.assignReputation(untrustWorthyVideos, reputationScores)
         noVideos = this.assignReputation(noVideos, reputationScores)
-        fillerVideos = this.assignReputation(fillerVideos, fillerReputationScores).concat(this.assignReputation(["peres.mp4","tiago.mp4"], [4,5]));
+        fillerVideos = this.assignReputation(fillerVideos, fillerReputationScores).concat(this.assignReputation(["canina.mp4","fernando.mp4"], [4,5]));
 
 
-        videos = this.mixVideos(trustWorthyVideos, untrustWorthyVideos, noVideos, fillerVideos)
+        const videos = this.mixVideos(trustWorthyVideos, untrustWorthyVideos, noVideos, fillerVideos)
         
         console.log(JSON.stringify(videos))
 
@@ -69,7 +67,7 @@ export default class MainTest extends React.Component {
     }
 
     generateFillerReputationScores(n){
-        let reputations = [5,4,2,1,5,4,2,1,5,4,2,1]
+        let reputations = [5,2,1,5,2,1,5,2,1,5,2,1,5,2,1,5,2,1]
         return reputations.slice(0, n)
     }
 
@@ -92,7 +90,17 @@ export default class MainTest extends React.Component {
 
     storeTest(age, gender, internetUsage) {
         this.props.dispatch(storeTest(this.state.videos, "Main_Test", age, gender, internetUsage))
-        browserHistory.push("/thanks");
+
+
+        browserHistory.push("/thanks/" + this.calculatePrize());
+    }
+
+    calculatePrize(){
+        const videos = this.state.videos
+        const purchaseDecisions = videos.map(video => video.purchase_decision)
+        const numberOfPurchases = purchaseDecisions.reduce((a,b) => a + b, 0)
+        const prize = (Math.floor(numberOfPurchases / 4.20) + 1)
+        return prize
     }
 
     onLikertScaleClick(selectedRating){
@@ -131,7 +139,6 @@ export default class MainTest extends React.Component {
         const video = videos[activeVideo]
 
         const Input = this.renderPrompt(video)
-
 
         return (
             <div id="maintest" class="container">
